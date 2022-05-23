@@ -31,7 +31,7 @@ df = data.copy()
 # 'GRN leading ALP', 'NAT leading IND', 'ALP leading GRN'
  
 df['Count'] = 1
-df.loc[df['prediction'] == '', 'prediction'] = "Uncalled"
+df.loc[df['prediction'] == '', 'prediction'] = "Too close to call"
 df.loc[df['prediction'].isin(['NAT', 'LNP', 'LIB']), 'prediction'] = 'Coalition'
 df.loc[df['prediction'].isin(['ALP']), 'prediction'] = 'Labor'
 
@@ -40,12 +40,12 @@ df.loc[df['prediction'].isin(['ALP']), 'prediction'] = 'Labor'
 
 # df.loc[df['prediction'].isin(['ALP leading GRN', 'ALP leading']), 'prediction'] = 'ALP leading'
 
-# df.loc[df['prediction'].isin(['KAP', 'IND', 'GRN', 'CA']), 'prediction'] = 'Other'
+df.loc[df['prediction'].isin(['KAP', 'IND', 'GRN', 'CA']), 'prediction'] = 'Other/independent'
 # df.loc[df['prediction'].isin(['GRN leading ALP', 'IND leading']), 'prediction'] = 'Other leading'
 
 
 grp = df.groupby(by=['prediction'])['Count'].sum().reset_index()
-grp = grp.loc[grp['prediction'].isin(['Coalition', 'Labor'])]
+# grp = grp.loc[grp['prediction'].isin(['Coalition', 'Labor'])]
 
 p = grp
 
@@ -65,6 +65,8 @@ print(syd_now)
 # %%
 grp['Color'] = '#b51800'
 grp.loc[grp['prediction'] == 'Coalition', 'Color'] = '#005689'
+grp.loc[grp['prediction'] == 'Other/independent', 'Color'] = '#7d7569'
+grp.loc[grp['prediction'] == 'Too close to call', 'Color'] = '#4e0375'
 
 final = grp.to_dict(orient='records')
 
