@@ -65,8 +65,8 @@ print(syd_now)
 # %%
 grp['Color'] = '#b51800'
 grp.loc[grp['prediction'] == 'Coalition', 'Color'] = '#005689'
-grp.loc[grp['prediction'] == 'Other/independent', 'Color'] = '#7d7569'
-grp.loc[grp['prediction'] == 'Too close to call', 'Color'] = '#4e0375'
+grp.loc[grp['prediction'] == 'Other/independent', 'Color'] = '#4e0375'
+grp.loc[grp['prediction'] == 'Too close to call', 'Color'] = '#7d7569'
 
 final = grp.to_dict(orient='records')
 
